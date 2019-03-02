@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>NarganV1a4ATEC : Built with Processing and Processing.js</title>
+	<link rel="icon"  type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAQAAVzABAEAjBQAaDwYAWjUGAGE6CQBrQQ0ATS8PAFhAJwBUQC8AbFI6AHVXPACBZk4A4NrWAPb19QAAAAAAAMmZmZmZmgAJIwAAAAAAcMIjPjA+PjAKpxIuMDMzMAm0Ii4zMzMACaIiLt3dMAAJtyIuIzPQAAm0Un5yM+IzKLRkfncy4iIotRF+dyLkIiq0QX53F+EiGrQUTkd34iIatEVu7u5iIVrBVVRBRFRVbAtGZGZla2uwAMu7u7u8vADAAwAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIABAADAAwAA" />
+	<meta name="Generator" content="Processing" />
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="logo.css">
+	<!--[if lt IE 9]>
+		<script type="text/javascript">alert("Your browser does not support the HTML5 canvas tag. Use Google Chrome, Firefox or Internet Explorer 9 and above.");</script>
+	<![endif]-->
+	<!-- <script src="https://maps.googleapis.com/maps/api/js"></script> -->
+	<script type="text/javascript" src="tinyscrollbar.min.js"></script>
+	<script type="text/javascript" src="list.min.js"></script>
+	<script type="text/javascript" src="mapFunctions.js"></script>	
+	<script type="text/javascript" src="filterFunctions.js"></script>	
+	<script type="text/javascript" src="processing.js"></script>
+	<script type="text/javascript">
+// convenience function to get the id attribute of generated sketch html element
+function getProcessingSketchId () { return 'NarganV1a4ATEC'; }
+</script>
+
+</head>
+<body>
+ 	<header id="header">
+	  <div class="acronym">
+	    <a id="nargan" href="http://www.nargan.com/main/"></a>
+	    <span>NARGAN</span>
+		<span>IN</span><div>tegrated</div><span>Vi</span><div>rtual</div><span>T</span><div>our</div><span>E</span><div>lements</div>
+	  </div>
+	</header> 
+	<div id ="viewport">
+		<div id="welcome" class="vis">
+			<ul class="splash">
+				<li>
+					<span>Image 01</span>
+				</li>
+				<li>
+					<span>Image 02</span>
+				</li>
+				<li>
+					<span>Image 03</span>
+				</li>
+				<li>
+					<span>Image 04</span>
+				</li>
+				<li>
+					<span>Image 05</span>
+				</li>
+				<li>
+					<span>Image 06</span>
+				</li>
+			</ul>
+			<!-- <img id="splash" onload="this.style.opacity='1';" src="splash.jpg"> -->
+			<div id="logo" class="logo">
+		    	<ul><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+		      	<div id="dot" class="animated"></div>		      	
+				<span id="message">Loading...</span>
+				<!--[if lt IE 10]>
+					<script type="text/javascript">
+						document.getElementById('message').innerHTML='<marquee behavior="alternate">Loading...</marquee>';
+						var el = document.getElementById('dot');
+						el.style.left = '141px';
+						el.style.top = '-6px';
+					</script>
+				<![endif]-->
+		    </div>	
+		</div>
+		<div id="content">
+			<canvas id="NarganV1a4ATEC" data-processing-sources="NarganV1a4ATEC.pde">
+				<p>Your browser does not support the canvas tag.</p>
+			</canvas>
+			<noscript>
+				<p>JavaScript is required to view the contents of this page.</p>
+			</noscript>
+			<div id="tooltippos"><div id="tooltip" class="hid" onmouseover="this.className='hid'"></div></div>
+		</div>
+		<div id="menu1">	
+			<form name="checkform" id="checkform">  
+				<label>
+					<input type="checkbox" name="VToggle" unchecked onchange="toggleVP5(checked)"/>
+					<span id="vtoggle" class="button" onmouseover="highlightVP5(true)" onmouseout="highlightVP5(false)">Virtual Tours Only<div id="vi"></div></span>
+				</label> 
+				<br>	
+				<br>		
+				<label>  				
+					<input type="button" name="CheckMult" onclick="checkMult(0,10)"/>
+					<span class="button" onmouseover="linkCatP5Mult(this.parentNode)" onmouseout="linkCatP5(null)">All Categories</span>	
+					<br>		
+					<label>  
+						<input type="checkbox" name="CheckMult" value="0" onclick="checkMult(0,4)"/>
+						<span class="button" onmouseover="linkCatP5Mult(this)" onmouseout="linkCatP5(null)">Petrochemical Industries</span>
+						<label>
+							<input type="checkbox" name="filterToggle" value="0" checked onchange="checkThis(value,checked)"/>
+							<span class="toggle cat0" onmouseover="linkCatP5(this)" onmouseout="linkCatP5(null)">Ethylene</span>
+						</label>
+						<label>
+							<input type="checkbox" name="filterToggle" value="1" checked onchange="checkThis(value,checked)"/>
+							<span class="toggle cat0" onmouseover="linkCatP5(this)" onmouseout="linkCatP5(null)">Butene</span>
+						</label>  
+						<label>
+							<input type="checkbox" name="filterToggle" value="2" checked onchange="checkThis(value,checked)"/>
+							<span class="toggle cat0" onmouseover="linkCatP5(this)" onmouseout="linkCatP5(null)">Polyethylene</span>
+						</label>
+						<label>
+							<input type="checkbox" name="filterToggle" value="3" checked onchange="checkThis(value,checked)"/>
+							<span class="toggle cat0" onmouseover="linkCatP5(this)" onmouseout="linkCatP5(null)">Polypropylene</span>
+						</label>  
+						<label>
+							<input type="checkbox" name="filterToggle" value="4" checked onchange="checkThis(value,checked)"/>
+							<span class="toggle cat0" onmouseover="linkCatP5(this)" onmouseout="linkCatP5(null)">Other Plants</span>
+						</label> 			
+					</label>			
+					<br>
+					<label>  
+						<input type="checkbox" name="CheckMult" value="5" onclick="checkMult(5,6)"/>
+						<span class="button" onmouseover="linkCatP5Mult(this)" onmouseout="linkCatP5(null)">Oil Industries</span>
+						<label>
+							<input type="checkbox" name="filterToggle" value="5" checked onchange="checkThis(value,checked)"/>
+							<span class="toggle cat1" onmouseover="linkCatP5(this)" onmouseout="linkCatP5(null)">Crude Oil Refineries</span>
+						</label> 
+						<label>
+							<input type="checkbox" name="filterToggle" value="6" checked onchange="checkThis(value,checked)"/>
+							<span class="toggle cat1" onmouseover="linkCatP5(this)" onmouseout="linkCatP5(null)">Other Oil Projects</span>
+						</label> 			
+					</label>
+					<br>
+					<label>  
+						<input type="checkbox" name="CheckMult" value="7" onclick="checkMult(7,8)"/>
+						<span class="button" onmouseover="linkCatP5Mult(this)" onmouseout="linkCatP5(null)">Gas Industries</span>
+						<label>
+							<input type="checkbox" name="filterToggle" value="7" checked onchange="checkThis(value,checked)"/>
+							<span class="toggle cat2" onmouseover="linkCatP5(this)" onmouseout="linkCatP5(null)">Gas Treatment Plants</span>
+						</label> 
+						<label>
+							<input type="checkbox" name="filterToggle" value="8" checked onchange="checkThis(value,checked)"/>
+							<span class="toggle cat2" onmouseover="linkCatP5(this)" onmouseout="linkCatP5(null)">Gas Separation Plants</span>
+						</label> 
+					</label>		
+					<br>
+					<label>  
+						<input type="checkbox" name="CheckMult" value="9" onclick="checkMult(9,10)"/>
+						<span class="button" onmouseover="linkCatP5Mult(this)" onmouseout="linkCatP5(null)">Chemical Industries</span>
+						<label>
+							<input type="checkbox" name="filterToggle" value="9" checked onchange="checkThis(value,checked)"/>
+							<span class="toggle cat3" onmouseover="linkCatP5(this)" onmouseout="linkCatP5(null)">Chemical Plants</span>
+						</label> 
+						<label>
+							<input type="checkbox" name="filterToggle" value="10" checked onchange="checkThis(value,checked)"/>
+							<span class="toggle cat3" onmouseover="linkCatP5(this)" onmouseout="linkCatP5(null)">Misc. Projects</span>
+						</label> 
+					</label>	
+				</label>				
+			</form>	
+			<br>
+			<br>	
+			<label>
+				<input type="checkbox" name="fieldsToggle" checked onchange="toggleMapP5(checked)"/>
+				<span class="toggle field">Map</span>
+			</label> 				
+			<label>
+				<input type="checkbox" name="fieldsToggle" checked onchange="toggleFieldsP5(2, checked)"/>
+				<span class="toggle field" onmouseover="highlightFieldsP5(2)" onmouseout="highlightFieldsP5(0)">Oil Fields</span>
+			</label> 
+			<label>
+				<input type="checkbox" name="fieldsToggle" checked onchange="toggleFieldsP5(1, checked)"/>
+				<span class="toggle field" onmouseover="highlightFieldsP5(1)" onmouseout="highlightFieldsP5(0)">Gas Fields</span>
+			</label> 
+		</div>	
+		<div id="menu2">
+			<input type="search" name="search" rel="search" class="search" onblur="clearListSearch(this)" placeholder=""/>
+			<!-- <input type="search" id="custom-search" class="search" name="custom-search" onblur="clearList(this)" placeholder=""/>-->			
+			<!-- <button class="sort" data-sort="name">Name</button>  -->
+			<!-- <button class="sort" data-sort="year">Year</button> -->
+			<div id="projectlist">
+				<div class="scrollbar"><div class="track"><div class="trackline"></div><div class="thumb noSelect" unselectable="on"></div></div></div>
+				<div class="viewport">
+					<ul class="list overview"></ul>
+				</div>
+			</div>
+		</div>
+		<div id="menu3">
+			<!-- <label>
+				<input type="button" name="fieldsToggle" onclick="toggleFieldsP5(false)"/>
+				<span class="button" onmouseover="highlightFieldsP5(2)" onmouseout="highlightFieldsP5(0)">Oil</span>
+			</label> 
+			<label>
+				<input type="button" name="fieldsToggle" onclick="toggleFieldsP5(true)"/>
+				<span class="button" onmouseover="highlightFieldsP5(1)" onmouseout="highlightFieldsP5(0)">Gas</span>
+			</label>  -->
+			<label>
+				<input type="button" name="zoomIn" onclick="zoomInP5()"/>
+				<span class="button buttonsmall" title="Zoom In">+</span>
+			</label> 
+			<label>
+				<input type="button" name="zoomOut" onclick="zoomOutP5()"/>
+				<span class="button buttonsmall" title="Zoom Out">&#8722</span>
+			</label> 
+			<label>
+				<input type="button" name="zoomExt" onclick="zoomExtP5()"/>
+				<span class="button buttonsmall" title="Reset Zoom">&#215</span>
+			</label> 
+		</div>
+		<section id="details">
+			<div id="detailsheader">
+				<div id="detailsx" onclick="closeDetails();">&#215</div>
+				<div id="detailsname">PROJECT NAME</div>
+			</div>
+			<div id="art">
+				<div class="scrollbar"><div class="track"><div class="trackline"></div><div class="thumb noSelect" unselectable="on"></div></div></div>
+				<div class="viewport">
+					<article id="detailsart" class="overview">
+						<div id="detailsmap">Could not load Google Maps</div>
+						<p id="detailsp">PROJECT DESCRIPTION</p>
+						<table id="detailstable">
+							<tr id="dt0">
+								<td class="colA">Owner / Client :</td>
+								<td class="colB"></td>
+							</tr>
+							<tr id="dt1">
+								<td class="colA">Scope of Work :</td>
+								<td class="colB"></td>
+							</tr>	
+							<tr id="dt2">
+								<td class="colA">Location :</td>
+								<td class="colB"></td>
+							</tr>
+							<tr id="dt3">
+								<td class="colA">Capacity :</td>
+								<td class="colB"></td>
+							</tr>
+							<tr id="dt4">
+								<td class="colA">Partner / Subcontractor :</td>
+								<td class="colB"></td>
+							</tr>
+							<tr id="dt5">
+								<td class="colA">Technology Provider :</td>
+								<td class="colB"></td>
+							</tr>
+							<tr id="dt6">
+								<td class="colA">Contract Award Date :</td>
+								<td class="colB"></td>
+							</tr>	
+							<tr id="dt7">
+								<td class="colA">Project Status :</td>
+								<td class="colB"></td>
+							</tr>	
+							<tr id="dt8">
+								<td class="colA">Attachment :</td>
+								<td class="colB"></td>
+							</tr>								
+						</table>
+						<div id="detailsss" class="slideshow"></div>
+					</article>
+				</div>
+			</div>
+		</section>	
+		<a id="virtual" class="hid" href="#" target="_blank">Virtual Tour</a>
+	</div>
+</body>
+</html>
