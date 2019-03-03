@@ -607,15 +607,15 @@ float[] findPositionOnBezier(float x1, float y1, float x2, float y2, float x3, f
 void setPreCSS() {
   var precss = document.getElementById("precss");
   if (precss) document.head.removeChild(precss);
-  
-  var c0 = "#"+hex(CAT0,6);
-  var c1 = "#"+hex(CAT1,6);
-  var c2 = "#"+hex(CAT2,6);
-  var c3 = "#"+hex(CAT3,6);
-  var c0b = "#"+hex(brighten(CAT0),6);
-  var c1b = "#"+hex(brighten(CAT1),6);
-  var c2b = "#"+hex(brighten(CAT2),6);
-  var c3b = "#"+hex(brighten(CAT3),6);
+
+  var c0 = "#"+hex(CAT0, 6);
+  var c1 = "#"+hex(CAT1, 6);
+  var c2 = "#"+hex(CAT2, 6);
+  var c3 = "#"+hex(CAT3, 6);
+  var c0b = "#"+hex(brighten(CAT0), 6);
+  var c1b = "#"+hex(brighten(CAT1), 6);
+  var c2b = "#"+hex(brighten(CAT2), 6);
+  var c3b = "#"+hex(brighten(CAT3), 6);
 
   var dw = int(min(height * .7, .5 * width));
   var cssText = 
@@ -644,9 +644,8 @@ void setPreCSS() {
   if (width - w1 - w2 < height) {
     cssText += "#menu1{left:-"+(w1-28)+"px;}"; 
     //cssText += "#menu1 .toggle{color:rgba(0,0,0,1)}#menu1 .button{color:rgba(255,255,255,1)}";
-  }
-  else cssText += "#menu1{left:0px;}";//#menu1 .toggle{color:rgba(0,0,0,1)}#menu1 .button{color:rgba(255,255,255,1)}";
-    
+  } else cssText += "#menu1{left:0px;}";//#menu1 .toggle{color:rgba(0,0,0,1)}#menu1 .button{color:rgba(255,255,255,1)}";
+
   precss = document.createElement("style");
   precss.type = "text/css";
   precss.id = "precss";  
@@ -654,23 +653,23 @@ void setPreCSS() {
   document.head.appendChild(precss);
 
   detailsX = round(.5 * width);
-  updateScrollBar(scrollbar,document.getElementById("art"));
-  updateScrollBar(scrollbar2,document.getElementById("projectlist"));
+  updateScrollBar(scrollbar, document.getElementById("art"));
+  updateScrollBar(scrollbar2, document.getElementById("projectlist"));
 }
 
-void updatescroll(){
-  updateScrollBar(scrollbar,document.getElementById("art"));
+void updatescroll() {
+  updateScrollBar(scrollbar, document.getElementById("art"));
 }
 
-void updatescroll2(){
-  updateScrollBar(scrollbar2,document.getElementById("projectlist"));
+void updatescroll2() {
+  updateScrollBar(scrollbar2, document.getElementById("projectlist"));
 }
 
-void updateScrollBar(Object bar,Object elem){
+void updateScrollBar(Object bar, Object elem) {
   bar.update();
   if (bar.contentRatio < 1) elem.className = "scrolling";
   else elem.className = "";
-  bar.update();  
+  bar.update();
 }
 
 void showTooltip(Project p) {
@@ -680,8 +679,38 @@ void showTooltip(Project p) {
   } else {
     tooltip.className = "cat" + p.cat; 
     tooltip.innerHTML = p.name;
-    var tooltippos = document.getElementById("tooltippos");
-    tooltippos.style.top = (w.w2sY(p.y) - 7) + "px"; 
+    setTooltipPos(p);
+  }
+}
+
+void showTooltipC(Cluster c) {
+  var tooltip = document.getElementById("tooltip");  
+  if (c == null) {
+    tooltip.className = "hid";
+  } else {
+    tooltip.className = "vis"; 
+    tooltip.innerHTML = c.count + " Projects";
+    setTooltipPos(c);
+  }
+}
+
+/*
+void showTooltipString(String s) {
+  var tooltip = document.getElementById("tooltip");  
+  if (s == null) {
+    tooltip.className = "hid";
+  } else {
+    tooltip.className = "vis"; 
+    tooltip.innerHTML = s;
+    setTooltipPos();
+  }
+}
+*/
+
+void setTooltipPos(Object p) {
+  var tooltippos = document.getElementById("tooltippos");
+  if (p instanceof Project) {
+    tooltippos.style.top = (w.w2sY(p.y) - 9) + "px"; 
     if (mouseX < width / 2) {
       tooltippos.style.left = w.w2sX(p.x) + "px"; 
       tooltippos.style.right = "";  
@@ -693,31 +722,22 @@ void showTooltip(Project p) {
       tooltip.style.left = "";
       tooltip.style.right = 16 + "px";
     }
-  }
-}
-
-void showTooltipString(String s) {
-  var tooltip = document.getElementById("tooltip");  
-  if (s == null) {
-    tooltip.className = "hid";
-  } else {
-    tooltip.className = "vis"; 
-    tooltip.innerHTML = s;
-    var tooltippos = document.getElementById("tooltippos");
-    tooltippos.style.top = mouseY + "px";    
+  } else if (p instanceof Cluster) {
+    tooltippos.style.top = (w.w2sY(p.y) - 9) + "px"; 
     if (mouseX < width / 2) {
-      tooltippos.style.left = mouseX + "px";  
+      tooltippos.style.left = w.w2sX(p.x) + "px"; 
       tooltippos.style.right = "";  
-      tooltip.style.left = 16 + "px";
+      tooltip.style.left = p.r/2 + 8 + "px";
       tooltip.style.right = "";
     } else {
-      tooltippos.style.right = (width - mouseX) + "px";   
+      tooltippos.style.right = (width - w.w2sX(p.x)) + "px";   
       tooltippos.style.left = "";
       tooltip.style.left = "";
-      tooltip.style.right = 8 + "px";
+      tooltip.style.right = p.r/2 + 8 + "px";
     }
   }
 }
+
 boolean md = false;
 int mx0, my0;
 
@@ -741,7 +761,8 @@ void mouseMoved() {
     }
     if (selC != null) {
       if (selC.count == 1) showTooltip(selC.children[0]);
-      else showTooltipString(selC.count + " Projects (Click to Zoom In)");
+      //else showTooltipString(selC.count + " Projects");
+      else showTooltipC(selC);
       cursor(HAND);
     } else {
       showTooltip(null);
@@ -846,7 +867,8 @@ void checkHover(float x,float y){
   }
   if (selC != null) {
     if (selC.count == 1) showTooltip(selC.children[0]);
-    else showTooltipString(selC.count + " Projects (Click to Zoom In)");
+    //else showTooltipString(selC.count + " Projects");
+    else showTooltipC(selC);
     cursor(HAND);
     return;
   } else {

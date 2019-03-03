@@ -551,7 +551,7 @@ opacity: 1;
   border-radius: 4px;
   color: rgb(55,59,68);
   font-weight: bold;
-  font-size: 12px;  
+  font-size: 14px;  
   z-index: 4;  
   transition: background-color .2s linear, color .2s linear;
 }
