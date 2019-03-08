@@ -762,7 +762,8 @@ boolean md = false;
 int mx0, my0;
 
 void mouseScrolled() {
-  float newZ = (mouseScroll > 0) ? w.nz * 1.25 : w.nz * .8;
+//  float newZ = (mouseScroll > 0) ? w.nz * 1.25 : w.nz * .8;
+  float newZ = (mouseScroll > 0) ? w.nz * 1.5 : w.nz * .666;
   newZ = constrain(newZ, .5, 500); 
   zoom(mouseX, mouseY, newZ);
   sLoop();
