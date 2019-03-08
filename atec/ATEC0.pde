@@ -648,12 +648,13 @@ void setPreCSS() {
 
   var w1 = localBoundingRect(document.getElementById("menu1")).width;
   var w2 = localBoundingRect(document.getElementById("menu2")).width;
-
+  var hm1 = document.getElementById("checkform").clientHeight;
+  
 //  if (width - w1 - w2 < height * 0) {
   if (width - w1 - w2 < 0) {    
     cssText += "#menu1{left:-"+(w1-28)+"px; height: " + height +"px;}"; 
     //cssText += "#menu1 .toggle{color:rgba(0,0,0,1)}#menu1 .button{color:rgba(255,255,255,1)}";
-  } else cssText += "#menu1{left:0px; height: " + height +"px;}"; //#menu1 .toggle{color:rgba(0,0,0,1)}#menu1 .button{color:rgba(255,255,255,1)}";
+  } else cssText += "#menu1{left:0px; height: " + hm1 +"px;}"; //#menu1 .toggle{color:rgba(0,0,0,1)}#menu1 .button{color:rgba(255,255,255,1)}";
 
   precss = document.createElement("style");
   precss.type = "text/css";
