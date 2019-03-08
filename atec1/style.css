@@ -55,9 +55,9 @@ html, body{
 	left: 0;
   right: 0;
   top: 0;
-  bottom: 0;
-  width: 80%;
-  height: 90%;
+  /*bottom: 0;*/
+  width: 100%;
+  height: calc(100% - 40px);
  /* background: url(vignette.jpg);*/
   background-size: 100% 100%;
 
