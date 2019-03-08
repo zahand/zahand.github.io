@@ -25,7 +25,7 @@ float detailsX, detailsY;
 boolean refresh = false;
 boolean idle = false;
 boolean showMap = true;
-boolean showGFields = showOFields = true;
+boolean showGFields = showOFields = false;
 boolean hGFields = hOFields = false;
 
 PFont fontA, fontB;
@@ -87,8 +87,8 @@ void sDraw() {
   //  }     
 
   //  drawPipelines();
+  for (Ost o : osts) o.drawLabels();  
   drawClusters(); 
-  for (Ost o : osts) o.drawLabels();
   drawProjects(); 
   if (selC != null) selC.drawPie();   
   if (selP != null) selP.draw();
@@ -271,8 +271,11 @@ class Cluster {
 //      }
 //      stroke(255);
 //      strokeWeight(s); 
+     
       fill(CLUSTER_PIE_FILL);
-      ellipse(_x, _y, r - s*2 + 8, r - s*2 + 8);
+//      ellipse(_x, _y, r - s*2 + 8, r - s*2 + 8);
+      ellipse(_x, _y, r, r);
+
     } else {
       Project p = children[0];
       fill(brighten(p.col1));
@@ -281,7 +284,7 @@ class Cluster {
     noFill();
     strokeWeight(s);
     strokeCap(SQUARE); 
-    float gap = -.01 ;   
+    float gap = -.02 ;   
     for (int i = 0; i < count; i++) {
       stroke(children[i].col1);
       arc(_x, _y, d, d, t*i + gap, t * (i+1) - gap);
@@ -341,21 +344,21 @@ void clusterProjects() {
   }
 }
 
-color CAT0 = color(255, 198, 0);
-color CAT1 = color(71, 179, 165);
-color CAT2 = color(140, 214, 0);
-color CAT3 = color(255, 63, 35);
+color CAT0 = color(255, 100, 30);//(255, 63, 35);
+color CAT1 = color(255, 198, 0);
+color CAT2 = color(71, 179, 165);
+color CAT3 = color(178, 215, 28);//(140, 214, 0);
 
 color BACKGROUND = color(255,255,255);//color(55, 59, 68);
 
-color WATER_FILL = color(235);//color(35, 38, 47);
+color WATER_FILL = color(225);//color(35, 38, 47);
 
 color NEIGH_STROKE = color(180);//color(80, 83, 91);
 
-color OST_FILL = color(50);//color(92, 98, 112);
+color OST_FILL = color(30);//color(92, 98, 112);
 color OST_FILL_MIN = color(55, 59, 68);
 color OST_FILL_MAX = color(92, 98, 112);
-color OST_STROKE = color(0,128);//color(142, 148, 167);
+color OST_STROKE = color(0);//color(142, 148, 167);
 color OST_TEXT = color(255);
 color OST_BG = color(240);
 
@@ -911,7 +914,7 @@ class Ost {
     } else {
       anim = animate(anim, 0, .05);
     }    
-    cStrokeWeight(.5);  
+    cStrokeWeight(.25);  
     cStroke(OST_STROKE);
     cFill(setAlpha(OST_FILL,anim*255));
     for (Polygon poly : polys) poly.render((anim != 0), boo, true);
@@ -947,7 +950,7 @@ class Ost {
         float _x = w.w2sX(c.x) - (s.width/2);
         float _y = w.w2sY(c.y);
         if (poly.lod == 0) _y -= (s.height/4);          
-        externals.context.globalAlpha=anim*.65;
+        externals.context.globalAlpha=anim;
         externals.context.drawImage(s,_x,_y);
         externals.context.globalAlpha=1;
       }
